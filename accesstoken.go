@@ -100,6 +100,27 @@ type Ticket struct {
 	WxErr
 }
 
+// GetTicket 读取获取TicketStruct
+func (s *Server) GetTicketStruct() (ak *Ticket) {
+	if s.ExternalTicketHandler != nil {
+		s.ticket = s.ExternalTicketHandler(s.AppId, s.AppName)
+		Printf("***%v[%v]远程获取Ticket:%v", util.Substr(s.AppId, 14, 30), s.AgentId, s.ticket)
+		return ak
+	}
+	if s.ticket == nil || s.ticket.ExpiresIn < time.Now().Unix() {
+		for i := 0; i < 3; i++ {
+			err := s.getTicket()
+			if err != nil {
+				log.Printf("getTicket[%v] err:%v", s.AgentId, err)
+				time.Sleep(time.Second)
+				continue
+			}
+			break
+		}
+	}
+	return s.ticket
+}
+
 // GetTicket 读取获取Ticket
 func (s *Server) GetTicket() string {
 	if s.ExternalTicketHandler != nil {

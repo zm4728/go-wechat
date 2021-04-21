@@ -52,6 +52,7 @@ type WxConfig struct {
 	AppName              string
 	AppType              int                                  // 0-公众号,小程序; 1-企业微信
 	ExternalTokenHandler func(string, ...string) *AccessToken // 外部token获取函数
+	ExternalTicketHandler func(string, ...string) *Ticket     // 外部ticket获取函数
 }
 
 // Server 微信服务容器
@@ -99,6 +100,7 @@ func Set(wc *WxConfig) *Server {
                 Token:                wc.Token,
                 EncodingAESKey:       wc.EncodingAESKey,
                 ExternalTokenHandler: wc.ExternalTokenHandler,
+                ExternalTicketHandler:wc.ExternalTicketHandler,
         }
 }
 // New 微信服务容器
