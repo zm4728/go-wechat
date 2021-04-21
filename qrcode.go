@@ -24,7 +24,7 @@ type SenceA struct {
 }
 type SenceB struct {
 	SceneId      string `json:"sceneId"`      // 场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）
-	SceneStr     map[string]interface{} `json:"scene_str"`  // 场景值ID（字符串形式的ID），字符串类型，长度限制为1到64
+	SceneStr     string `json:"scene_str"`  // 场景值ID（字符串形式的ID），字符串类型，长度限制为1到64
 }
 
 type QrcodeParamsResp struct {
