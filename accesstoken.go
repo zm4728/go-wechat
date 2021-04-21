@@ -77,6 +77,11 @@ type Ticket struct {
 
 // GetTicket 读取获取Ticket
 func (s *Server) GetTicket() string {
+	if s.ExternalTicketHandler != nil {
+		s.ticket = s.ExternalTicketHandler(s.AppId, s.AppName)
+		Printf("***%v[%v]远程获取Ticket:%v", util.Substr(s.AppId, 14, 30), s.AgentId, s.ticket)
+		return ""
+	}
 	if s.ticket == nil || s.ticket.ExpiresIn < time.Now().Unix() {
 		for i := 0; i < 3; i++ {
 			err := s.getTicket()

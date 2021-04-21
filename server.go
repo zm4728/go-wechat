@@ -85,6 +85,7 @@ type Server struct {
 	sync.Mutex  // accessToken读取锁
 
 	ExternalTokenHandler func(appId string, appName ...string) *AccessToken // 通过外部方法统一获取access token ,避免集群情况下token失效
+	ExternalTicketHandler func(appId string,appName ...string) *Ticket      //通过外部方法统一获取jsTicket ,避免集群情况下Ticket失效
 }
 
 func Set(wc *WxConfig) *Server {
