@@ -33,8 +33,9 @@ type QrcodeParamsResp struct {
 	Url  string `json:"url"`
 }
 
-func (s *Server) CreateQrcodeParams(v QrcodeParamsReq) (m *QrcodeParamsResp, err error) {
+func (s *Server) CreateQrcodeParams(v QrcodeParamsReq) (b *QrcodeParamsResp, err error) {
 	url := fmt.Sprintf(s.RootUrl+ParamsQrcode, s.GetAccessToken())
+	m := new(QrcodeParamsResp)
 	err = util.PostJsonPtr(url, v,m)
 	if err != nil {
 		return m,err
