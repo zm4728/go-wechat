@@ -8,7 +8,7 @@ package main
 import (
 	"net/http"
 
-	"gitee.com/fbbi/go-wechat" // 微信SDK包
+	"github.com/zm4728/go-wechat" // 微信SDK包
 )
 
 func main() {
@@ -30,7 +30,7 @@ func main() {
 	http.ListenAndServe(":9090", nil)
 }
 
-More info: https://gitee.com/fbbi/go-wechat
+More info: https://github.com/zm4728/go-wechat
 
 */
 package wechat

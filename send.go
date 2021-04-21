@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"unicode/utf8"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // AddMsg 添加队列消息

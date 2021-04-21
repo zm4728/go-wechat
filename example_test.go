@@ -3,7 +3,7 @@ package wechat_test
 import (
 	"net/http"
 
-	"gitee.com/fbbi/go-wechat" // 微信SDK包
+	"github.com/zm4728/go-wechat" // 微信SDK包
 	// "github.com/labstack/echo"
 )
 

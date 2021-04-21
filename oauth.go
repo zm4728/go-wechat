@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // WXAPIOauth2 oauth2鉴权

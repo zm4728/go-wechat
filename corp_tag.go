@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // CorpAPITagList 企业微信标签接口

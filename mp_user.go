@@ -3,7 +3,7 @@ package wechat
 import (
 	"fmt"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // MPUserGetList 公众号用户接口

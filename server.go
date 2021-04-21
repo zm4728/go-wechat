@@ -14,7 +14,7 @@ import (
 	"net/http"
 	"sync"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // WXAPI 订阅号，服务号，小程序接口，相关接口常量统一以此开头

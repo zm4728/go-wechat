@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // FetchDelay 默认5分钟同步一次

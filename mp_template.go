@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // MPTemplateGetAll 服务号模板消息接口

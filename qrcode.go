@@ -3,7 +3,7 @@ package wechat
 import (
 	"encoding/json"
 	"fmt"
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 // 生成公众号带参二维码

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"gitee.com/fbbi/go-wechat/util"
+	"github.com/zm4728/go-wechat/util"
 )
 
 const (
