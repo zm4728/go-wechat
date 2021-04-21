@@ -39,6 +39,28 @@ func (s *Server) GetAccessToken() string {
 	return s.accessToken.AccessToken
 }
 
+// GetAccessToken 读取AccessToken
+func (s *Server) GetAccessTokenStruct() (ak *AccessToken) {
+	s.Lock()
+	defer s.Unlock()
+	var err error
+	if s.accessToken == nil || s.accessToken.ExpiresIn < time.Now().Unix() {
+		for i := 0; i < 3; i++ {
+			err = s.getAccessToken()
+			if err == nil {
+				break
+			}
+			log.Printf("GetAccessTokenStruct[%v] %v", s.AgentId, err)
+			time.Sleep(time.Second)
+		}
+		if err != nil {
+			return
+		}
+	}
+	return s.accessToken
+}
+
+
 // GetUserAccessToken 获取企业微信通讯录AccessToken
 func (s *Server) GetUserAccessToken() string {
 	if us, ok := UserServerMap[s.AppId]; ok {
@@ -67,6 +89,9 @@ func (s *Server) getAccessToken() (err error) {
 	return
 
 }
+
+
+
 
 // Ticket JS-SDK
 type Ticket struct {
