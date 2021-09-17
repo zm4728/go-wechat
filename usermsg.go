@@ -30,8 +30,10 @@ type (
 		Url          string  // link
 		Event        string  // event
 		EventKey     string  // event
-		SessionFrom  string  // event|user_enter_tempsession
 		ChangeType   string  // crop change_external_contact
+		ExternalUserID string //crop ExternalUserID
+		UserID         string  //crop userId
+		SessionFrom  string  // event|user_enter_tempsession
 		Ticket       string
 		FileKey      string
 		FileMd5      string
