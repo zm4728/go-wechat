@@ -68,7 +68,25 @@ type UserInfo struct {
 	ExtAttr        struct {
 		Attrs []Extattr `json:"attrs"`
 	} `json:"extattr"`
+	ExternalContact struct{
+		ExternalUserid string `json:"external_userid"`
+		Name  string `json:"name"`
+		Type  int `json:"type"`
+		Avatar string `json:"avatar"`
+		Gender int `json:"gender"`
+		Unionid string `json:"unionid"`
+	} `json:"external_contact"`   //crop externalUserInfo
+	FollowUser  []followU `json:"follow_user"` // 添加此外部联系人的企业员工
 }
+type followU struct {
+	Userid string `json:"userid"`
+	Remark string `json:"remark"`
+	Description string `json:"description"`
+	Createtime  int `json:"createtime"`
+	AddWay  int `json:"add_way"`
+	OperUserid string `json:"oper_userid"`
+}
+
 
 // Extattr 额外属性
 type Extattr struct {

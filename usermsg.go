@@ -31,6 +31,7 @@ type (
 		Event        string  // event
 		EventKey     string  // event
 		SessionFrom  string  // event|user_enter_tempsession
+		ChangeType   string  // crop change_external_contact
 		Ticket       string
 		FileKey      string
 		FileMd5      string
