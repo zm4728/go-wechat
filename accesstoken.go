@@ -101,7 +101,7 @@ type Ticket struct {
 }
 
 // GetTicket 读取获取TicketStruct
-func (s *Server) GetTicketStruct() (ak *Ticket) {
+func (s *Server) GetTicketStruct(isAgent bool) (ak *Ticket) {
 	if s.ExternalTicketHandler != nil {
 		s.ticket = s.ExternalTicketHandler(s.AppId, s.AppName)
 		Printf("***%v[%v]远程获取Ticket:%v", util.Substr(s.AppId, 14, 30), s.AgentId, s.ticket)
@@ -109,7 +109,7 @@ func (s *Server) GetTicketStruct() (ak *Ticket) {
 	}
 	if s.ticket == nil || s.ticket.ExpiresIn < time.Now().Unix() {
 		for i := 0; i < 3; i++ {
-			err := s.getTicket()
+			err := s.getTicket(isAgent)
 			if err != nil {
 				log.Printf("getTicket[%v] err:%v", s.AgentId, err)
 				time.Sleep(time.Second)
@@ -121,6 +121,7 @@ func (s *Server) GetTicketStruct() (ak *Ticket) {
 	return s.ticket
 }
 
+
 // GetTicket 读取获取Ticket
 func (s *Server) GetTicket() string {
 	if s.ExternalTicketHandler != nil {
@@ -130,7 +131,7 @@ func (s *Server) GetTicket() string {
 	}
 	if s.ticket == nil || s.ticket.ExpiresIn < time.Now().Unix() {
 		for i := 0; i < 3; i++ {
-			err := s.getTicket()
+			err := s.getTicket(false)
 			if err != nil {
 				log.Printf("getTicket[%v] err:%v", s.AgentId, err)
 				time.Sleep(time.Second)
@@ -142,8 +143,13 @@ func (s *Server) GetTicket() string {
 	return s.ticket.Ticket
 }
 
-func (s *Server) getTicket() (err error) {
-	url := s.JsApi + s.GetAccessToken()
+func (s *Server) getTicket(isAgent bool) (err error) {
+	url:=""
+	if isAgent{
+		url = s.JsAgentApi + s.GetAccessToken()
+	}else{
+		url = s.JsApi + s.GetAccessToken()
+	}
 	at := new(Ticket)
 	if err = util.GetJson(url, at); err != nil {
 		return

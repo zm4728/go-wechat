@@ -22,6 +22,9 @@ const (
 	CorpAPIUserAdd    = CorpAPI + `user/create?access_token=`
 	CorpAPIUserUpdate = CorpAPI + `user/update?access_token=`
 	CorpAPIUserDel    = CorpAPI + `user/delete?access_token=`
+
+	// CropExternal User 外部联系人
+	CorpAPIExternalUserGet    = CorpAPI + "externalcontact/get?access_token=%s&external_userid=%s"
 )
 
 // UserOauth 用户鉴权信息
@@ -266,4 +269,14 @@ func (s *Server) CheckUserAcl(userid, acl string) bool {
 	}
 
 	return strings.Contains(acl, "|"+u.Name+"|") || strings.Contains(acl, "|"+u.UserId+"|")
+}
+
+// GetExternalUserInfo 从企业号通过userId获取外部用户信息
+func (s *Server) GetExternalUserInfo(userId string) (user UserInfo, err error) {
+	url := fmt.Sprintf(CorpAPIExternalUserGet, s.GetUserAccessToken(), userId)
+	if err = util.GetJson(url, &user); err != nil {
+		return
+	}
+	err = user.Error()
+	return
 }

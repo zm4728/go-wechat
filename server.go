@@ -30,7 +30,9 @@ const (
 	CorpAPI      = "https://qyapi.weixin.qq.com/cgi-bin/"
 	CorpAPIToken = CorpAPI + "gettoken?corpid=%s&corpsecret=%s"
 	CorpAPIMsg   = CorpAPI + "message/send?access_token="
-	CorpAPIJsapi = CorpAPI + "get_jsapi_ticket?access_token="
+
+	CorpAPIJsapi = CorpAPI + "get_jsapi_ticket?access_token=" //企业jsapi_ticket
+	CorpAgentAPIJsapi = CorpAPI + "ticket/get?type=agent_config&access_token=" //应用的jsapi_ticket
 )
 
 var (
@@ -75,6 +77,7 @@ type Server struct {
 	MsgUrl   string
 	TokenUrl string
 	JsApi    string
+	JsAgentApi string
 
 	Safe        int
 	accessToken *AccessToken
@@ -113,6 +116,7 @@ func New(wc *WxConfig) *Server {
 		s.MsgUrl = CorpAPIMsg
 		s.TokenUrl = CorpAPIToken
 		s.JsApi = CorpAPIJsapi
+		s.JsAgentApi = CorpAgentAPIJsapi
 		s.EntMode = true
 	default:
 		s.RootUrl = WXAPI
@@ -139,9 +143,9 @@ func New(wc *WxConfig) *Server {
 		UserServerMap[s.AppId] = s // 这里约定传入企业微信通讯录secret时，agentId=9999999
 	}
 
-	if s.AppType == 1 {
-		s.FetchUserList()
-	}
+	//if s.AppType == 1 {
+	//	s.FetchUserList()
+	//}
 
 	s.MsgQueue = make(chan interface{}, 1000)
 	go func() {
