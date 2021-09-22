@@ -4,7 +4,7 @@
 [![GoDoc](http://godoc.org/github.com/esap/wechat?status.svg)](http://godoc.org/github.com/esap/wechat)
 
 **微信SDK的golang实现，短小精悍，同时兼容【企业微信/服务号/订阅号/小程序】**
-
+## 代码来自 https://github.com/esap/wechat 只为自用
 ## 快速开始
 
 5行代码，链式消息，快速开启微信API示例:
