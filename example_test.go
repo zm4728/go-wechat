@@ -1,31 +1,45 @@
 package wechat_test
 
 import (
-	"github.com/zm4728/go-wechat" // 微信SDK包
-	// "github.com/labstack/echo"
+	"fmt"
+	"github.com/zm4728/go-wechat"
+	"testing"
 )
 
-func Example() {
-	wechat.Debug = true
-
+func TestWX(t *testing.T) {
 	cfg := &wechat.WxConfig{
 		Token:          "yourToken",
 		AppId:          "yourAppID",
 		Secret:         "yourSecret",
 		EncodingAESKey: "yourEncodingAesKey",
 	}
+app := wechat.New(cfg)
+	u,err:=app.GetExternalUserInfo("wm9zNPDAAAI47OuBawkpupT9y1tyYuYw")
+	fmt.Println(err)
+	fmt.Println(u)
+}
 
-	app := wechat.New(cfg)
+	//return
+	//wechat.Debug = true
+	//
+	//cfg := &wechat.WxConfig{
+	//	Token:          "yourToken",
+	//	AppId:          "yourAppID",
+	//	Secret:         "yourSecret",
+	//	EncodingAESKey: "yourEncodingAesKey",
+	//}
 
-		app.CreateQrcodeParams(wechat.QrcodeParamsReq{
-		ExpireSeconds: 60,
-		ActionName:    wechat.QR_STR_SCENE,
-		ActionInfo:  wechat.SenceA{Scene:wechat.SenceB{SceneStr: map[string]interface{}{
-			"bb":"11",
-		},
-		}},},
-		)
-	}
+	//app := wechat.New(cfg)
+	//
+	//	app.CreateQrcodeParams(wechat.QrcodeParamsReq{
+	//	ExpireSeconds: 60,
+	//	ActionName:    wechat.QR_STR_SCENE,
+	//	ActionInfo:  wechat.SenceA{Scene:wechat.SenceB{SceneStr: map[string]interface{}{
+	//		"bb":"11",
+	//	},
+	//	}},},
+	//	)
+	//}
 	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 	//	ctx := app.VerifyURL(w, r)
 	//

@@ -22,9 +22,6 @@ const (
 	CorpAPIUserAdd    = CorpAPI + `user/create?access_token=`
 	CorpAPIUserUpdate = CorpAPI + `user/update?access_token=`
 	CorpAPIUserDel    = CorpAPI + `user/delete?access_token=`
-
-	// CropExternal User 外部联系人
-	CorpAPIExternalUserGet    = CorpAPI + "externalcontact/get?access_token=%s&external_userid=%s"
 )
 
 // UserOauth 用户鉴权信息
@@ -71,25 +68,8 @@ type UserInfo struct {
 	ExtAttr        struct {
 		Attrs []Extattr `json:"attrs"`
 	} `json:"extattr"`
-	ExternalContact struct{
-		ExternalUserid string `json:"external_userid"`
-		Name  string `json:"name"`
-		Type  int `json:"type"`
-		Avatar string `json:"avatar"`
-		Gender int `json:"gender"`
-		Unionid string `json:"unionid"`
-	} `json:"external_contact"`   //crop externalUserInfo
-	FollowUser  []followU `json:"follow_user"` // 添加此外部联系人的企业员工
-}
-type followU struct {
-	Userid string `json:"userid"`
-	Remark string `json:"remark"`
-	Description string `json:"description"`
-	Createtime  int `json:"createtime"`
-	AddWay  int `json:"add_way"`
-	OperUserid string `json:"oper_userid"`
-}
 
+}
 
 // Extattr 额外属性
 type Extattr struct {
@@ -269,14 +249,4 @@ func (s *Server) CheckUserAcl(userid, acl string) bool {
 	}
 
 	return strings.Contains(acl, "|"+u.Name+"|") || strings.Contains(acl, "|"+u.UserId+"|")
-}
-
-// GetExternalUserInfo 从企业号通过userId获取外部用户信息
-func (s *Server) GetExternalUserInfo(userId string) (user UserInfo, err error) {
-	url := fmt.Sprintf(CorpAPIExternalUserGet, s.GetUserAccessToken(), userId)
-	if err = util.GetJson(url, &user); err != nil {
-		return
-	}
-	err = user.Error()
-	return
 }
