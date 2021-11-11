@@ -14,9 +14,10 @@ func TestWX(t *testing.T) {
 		EncodingAESKey: "yourEncodingAesKey",
 	}
 app := wechat.New(cfg)
-	u,err:=app.GetExternalUserInfo("wm9zNPDAAAI47OuBawkpupT9y1tyYuYw")
+	//u:=app.GetJsConfig("http://ks.mofahe.net/mp/")
+ ss,err:=app.GetExternalUserInfo("wmazTqCgAAftuC2x3srH2Tjrr55vHS-Q")
 	fmt.Println(err)
-	fmt.Println(u)
+ fmt.Println(ss.ExternalContact)
 }
 
 	//return

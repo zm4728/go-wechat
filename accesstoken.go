@@ -61,9 +61,14 @@ func (s *Server) GetAccessTokenStruct() (ak *AccessToken) {
 }
 
 
-// GetUserAccessToken 获取企业微信通讯录AccessToken
+// GetUserAccessToken 获取企业微信AccessToken
 func (s *Server) GetUserAccessToken() string {
-	if us, ok := UserServerMap[s.AppId]; ok {
+	return s.GetAccessToken()
+}
+
+// 获取企业通讯录AccessToken
+func (s *Server) GetTxlAccessToken() string {
+	if us, ok := UserServerMap[s.Secret]; ok {
 		return us.GetAccessToken()
 	}
 	return s.GetAccessToken()
@@ -146,7 +151,7 @@ func (s *Server) GetTicket() string {
 func (s *Server) getTicket(isAgent bool) (err error) {
 	url:=""
 	if isAgent{
-		url = s.JsAgentApi + s.GetAccessToken()
+		url = s.JsAgentApi + s.GetTxlAccessToken()
 	}else{
 		url = s.JsApi + s.GetAccessToken()
 	}

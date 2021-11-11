@@ -34,7 +34,7 @@ type UserOauth struct {
 
 // GetUserOauth 通过code鉴权
 func (s *Server) GetUserOauth(code string) (o UserOauth, err error) {
-	url := fmt.Sprintf(CorpAPIGetUserOauth, s.GetAccessToken(), code)
+	url := fmt.Sprintf(CorpAPIGetUserOauth, s.GetTxlAccessToken(), code)
 	if err = util.GetJson(url, &o); err != nil {
 		return
 	}
@@ -90,7 +90,7 @@ func (s *Server) UserUpdate(user *UserInfo) (err error) {
 // UserDelete 删除用户
 func (s *Server) UserDelete(user string) (err error) {
 	e := new(WxErr)
-	if err = util.GetJson(CorpAPIUserDel+s.GetUserAccessToken()+"&userid="+user, e); err != nil {
+	if err = util.GetJson(CorpAPIUserDel+s.GetTxlAccessToken()+"&userid="+user, e); err != nil {
 		return
 	}
 	return e.Error()
@@ -98,7 +98,7 @@ func (s *Server) UserDelete(user string) (err error) {
 
 // GetUserInfo 从企业号通过userId获取用户信息
 func (s *Server) GetUserInfo(userId string) (user UserInfo, err error) {
-	url := fmt.Sprintf(CorpAPIUserGet, s.GetUserAccessToken(), userId)
+	url := fmt.Sprintf(CorpAPIUserGet, s.GetTxlAccessToken(), userId)
 	if err = util.GetJson(url, &user); err != nil {
 		return
 	}

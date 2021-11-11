@@ -39,7 +39,9 @@ type (
 		FileMd5      string
 		FileTotalLen string
 		TaskId       string
-
+		TagType      string
+		Id           string
+		NewUserID    string
 		ScanCodeInfo struct {
 			ScanType   string
 			ScanResult string

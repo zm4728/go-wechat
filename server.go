@@ -140,7 +140,7 @@ func New(wc *WxConfig) *Server {
 	}
 
 	if s.AgentId == 9999999 {
-		UserServerMap[s.AppId] = s // 这里约定传入企业微信通讯录secret时，agentId=9999999
+		UserServerMap[s.Secret] = s // 这里约定传入企业微信通讯录secret时，agentId=9999999
 	}
 
 	//if s.AppType == 1 {
