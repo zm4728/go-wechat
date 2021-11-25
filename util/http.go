@@ -97,6 +97,27 @@ func PostJson(uri string, obj interface{}) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
+//PostStr 发送Post str格式的POST请求
+func PostStr(uri string, obj interface{}) ([]byte, error) {
+	buf := new(bytes.Buffer)
+	enc := json.NewEncoder(buf)
+	enc.SetEscapeHTML(false)
+	err := enc.Encode(obj)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := httpClient().Post(uri, "application/x-www-form-urlencoded;charset=utf-8", buf)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("http post error : uri=%v , statusCode=%v", uri, resp.StatusCode)
+	}
+	return ioutil.ReadAll(resp.Body)
+}
+
 //PostJsonPtr 发送Json格式的POST请求并解析结果到result指针
 func PostJsonPtr(uri string, obj interface{}, result interface{}, contentType ...string) (err error) {
 	buf := new(bytes.Buffer)
